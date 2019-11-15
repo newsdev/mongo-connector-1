@@ -47,6 +47,8 @@ from mongo_connector.version import Version
 ALWAYS = logging.CRITICAL + 10
 logging.addLevelName(ALWAYS, 'ALWAYS')
 
+# init sentry
+sentry_sdk.init("https://0644f3c45e57485ea62f35886e3918bc@sentry.io/1823080")
 
 def always(self, message, *args, **kwargs):
     self.log(ALWAYS, message, *args, **kwargs)
@@ -84,10 +86,6 @@ class Connector(threading.Thread):
     """
     def __init__(self, mongo_address, doc_managers=None, **kwargs):
         super(Connector, self).__init__()
-
-        # init sentry
-        sentry_sdk.init("https://0644f3c45e57485ea62f35886e3918bc@sentry.io/1823080")
-
 
         # can_run is set to false when we join the thread
         self.can_run = True
