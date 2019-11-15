@@ -357,7 +357,7 @@ class Connector(threading.Thread):
                 version = module.__version__
             elif hasattr(module, 'version'):
                 version = module.version
-            LOG.always('Target DocManager: %s version: %s', name, version)
+            LOG.info('Target DocManager: %s version: %s', name, version)
 
         self.read_oplog_progress()
         conn_type = None
@@ -1244,17 +1244,17 @@ def setup_logging(conf):
 
 def log_startup_info():
     """Log info about the current environment."""
-    LOG.always('Starting mongo-connector version: %s', __version__)
+    LOG.info('Starting mongo-connector version: %s', __version__)
     if 'dev' in __version__:
         LOG.warning('This is a development version (%s) of mongo-connector',
                     __version__)
-    LOG.always('Python version: %s', sys.version)
-    LOG.always('Platform: %s', platform.platform())
+    LOG.info('Python version: %s', sys.version)
+    LOG.info('Platform: %s', platform.platform())
     if hasattr(pymongo, '__version__'):
         pymongo_version = pymongo.__version__
     else:
         pymongo_version = pymongo.version
-    LOG.always('pymongo version: %s', pymongo_version)
+    LOG.info('pymongo version: %s', pymongo_version)
     if not pymongo.has_c():
         LOG.warning(
             'pymongo version %s was installed without the C extensions. '
